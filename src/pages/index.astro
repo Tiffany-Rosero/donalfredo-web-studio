@@ -1,0 +1,18 @@
+---
+/*
+  Página de inicio (ruta "/").
+  Una página solo importa el Layout y ordena las secciones.
+*/
+import Layout from "../layouts/Layout.astro";
+import Portada from "../components/inicio/Portada.astro";
+import ProductosDestacados from "../components/inicio/ProductosDestacados.astro";
+import SobreNosotrosResumen from "../components/inicio/SobreNosotrosResumen.astro";
+import RecetasResumen from "../components/inicio/RecetasResumen.astro";
+---
+
+<Layout title="Inicio">
+  <Portada />
+  <ProductosDestacados />
+  <SobreNosotrosResumen />
+  <RecetasResumen />
+</Layout>

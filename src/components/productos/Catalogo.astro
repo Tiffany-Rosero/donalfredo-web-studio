@@ -1,0 +1,589 @@
+---
+/*
+  Sección Catálogo de productos en la página Productos.
+  Diseño limpio y ordenado: tarjetas con botón "Agregar" que despliega un modal rápido
+  para elegir las libras y precio, conectado a un carrito de compra con pedido a WhatsApp.
+*/
+import { Image } from "astro:assets";
+import Contenedor from "../ui/Contenedor.astro";
+import imgSalchicha1 from "@pack/imagenes/producto_destacado_01..jpeg";
+import imgSalchicha2 from "@pack/imagenes/producto_destacado_02.png";
+import imgSalchicha3 from "@pack/imagenes/producto_destacado_03.png";
+import imgBoton from "@pack/imagenes/Boton.png";
+import imgChorizo from "@pack/imagenes/Chorizo.png";
+import imgMortadela from "@pack/imagenes/Mortadela.png";
+
+const productos = [
+  {
+    id: "salchicha-delgada",
+    nombre: "Salchicha Delgada",
+    descripcion: "La favorita de todos",
+    precio: 2.45,
+    categoria: "especialidades",
+    categoriaNombre: "Especialidades de la casa",
+    imagen: imgSalchicha1,
+    alt: "Fotografía de Salchicha Delgada",
+  },
+  {
+    id: "salchicha-mediana",
+    nombre: "Salchicha Mediana",
+    descripcion: "Ideal para tu día a día",
+    precio: 2.45,
+    categoria: "especialidades",
+    categoriaNombre: "Especialidades de la casa",
+    imagen: imgSalchicha2,
+    alt: "Fotografía de Salchicha Mediana",
+  },
+  {
+    id: "salchicha-gruesa",
+    nombre: "Salchicha Gruesa",
+    descripcion: "La que rinde más",
+    precio: 2.45,
+    categoria: "especialidades",
+    categoriaNombre: "Especialidades de la casa",
+    imagen: imgSalchicha3,
+    alt: "Fotografía de Salchicha Gruesa",
+  },
+  {
+    id: "boton",
+    nombre: "Boton",
+    descripcion: "Un clásico en tu mesa",
+    precio: 2.55,
+    categoria: "sabores-unicos",
+    categoriaNombre: "Sabores únicos",
+    imagen: imgBoton,
+    alt: "Fotografía de Boton",
+  },
+  {
+    id: "chorizo",
+    nombre: "Chorizo de la casa",
+    descripcion: "El sabor tradicional que encanta a todos.",
+    precio: 2.7,
+    categoria: "sabores-unicos",
+    categoriaNombre: "Sabores únicos",
+    imagen: imgChorizo,
+    alt: "Fotografía de Chorizo de la casa",
+  },
+  {
+    id: "mortadela",
+    nombre: "Mortadela",
+    descripcion: "La favorita de la casa",
+    precio: 2.55,
+    categoria: "mortadela",
+    categoriaNombre: "Mortadela",
+    imagen: imgMortadela,
+    alt: "Fotografía de Mortadela",
+  },
+];
+---
+
+<section id="catalogo" class="py-12 sm:py-16 md:py-24">
+  <Contenedor>
+    <div class="text-center" data-revelar>
+      <h1 class="text-4xl font-bold tracking-tight text-texto sm:text-5xl lg:text-6xl">
+        Descubre nuestros productos.
+      </h1>
+
+      <p class="mx-auto mt-4 max-w-3xl text-base text-texto sm:text-lg">
+        Explora nuestra variedad de embutidos y encuentra las opciones ideales para tus comidas y
+        preparaciones favoritas. Venta por libra.
+      </p>
+    </div>
+
+    <!-- Barra de filtros -->
+    <div class="mt-8 flex w-full overflow-x-auto pb-4 sm:justify-center" data-revelar>
+      <div class="flex gap-2">
+        <button
+          type="button"
+          data-filtro="todos"
+          aria-pressed="true"
+          class="filtro-btn inline-flex cursor-pointer items-center rounded-marca bg-marca px-5 py-2.5 text-sm font-bold text-marca-contraste shadow-marca transition borde-marca"
+        >
+          Todos
+        </button>
+        <button
+          type="button"
+          data-filtro="especialidades"
+          aria-pressed="false"
+          class="filtro-btn inline-flex cursor-pointer items-center rounded-marca bg-fondo px-5 py-2.5 text-sm font-bold text-texto shadow-marca transition borde-marca hover:opacity-80"
+        >
+          Especialidades de la casa
+        </button>
+        <button
+          type="button"
+          data-filtro="sabores-unicos"
+          aria-pressed="false"
+          class="filtro-btn inline-flex cursor-pointer items-center rounded-marca bg-fondo px-5 py-2.5 text-sm font-bold text-texto shadow-marca transition borde-marca hover:opacity-80"
+        >
+          Sabores únicos
+        </button>
+        <button
+          type="button"
+          data-filtro="mortadela"
+          aria-pressed="false"
+          class="filtro-btn inline-flex cursor-pointer items-center rounded-marca bg-fondo px-5 py-2.5 text-sm font-bold text-texto shadow-marca transition borde-marca hover:opacity-80"
+        >
+          Mortadela
+        </button>
+      </div>
+    </div>
+
+    <!-- Cuadrícula limpia de productos -->
+    <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3" data-revelar-cascada>
+      {
+        productos.map((item) => (
+          <article
+            class="tarjeta-producto relative flex flex-col overflow-hidden rounded-marca bg-fondo shadow-marca borde-marca"
+            data-categoria={item.categoria}
+            data-revelar
+          >
+            <div class="relative h-60 w-full overflow-hidden sm:h-64">
+              <Image
+                src={item.imagen}
+                alt={item.alt}
+                class="h-full w-full object-cover transition duration-300 hover:scale-105"
+              />
+            </div>
+
+            <div class="relative flex flex-1 flex-col justify-between p-6 pb-12">
+              <div>
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-xs font-bold tracking-wider text-texto-suave uppercase">
+                    {item.categoriaNombre}
+                  </span>
+                  <span class="font-titulos text-xl font-bold text-marca">
+                    ${item.precio.toFixed(2)} / lb
+                  </span>
+                </div>
+
+                <h2 class="mt-1 text-2xl font-bold tracking-tight text-texto">{item.nombre}</h2>
+
+                <p class="mt-2 text-base text-texto">{item.descripcion}</p>
+              </div>
+
+              <div class="mt-6">
+                <button
+                  type="button"
+                  class="btn-abrir-seleccion w-full cursor-pointer rounded-marca bg-marca px-5 py-3 text-base font-bold text-marca-contraste shadow-marca transition borde-marca hover:opacity-85"
+                  data-id={item.id}
+                  data-nombre={item.nombre}
+                  data-precio={item.precio}
+                >
+                  Agregar
+                </button>
+              </div>
+
+              <div
+                class="pointer-events-none absolute inset-x-0 bottom-0 leading-none"
+                aria-hidden="true"
+              >
+                <svg
+                  viewBox="0 0 500 40"
+                  preserveAspectRatio="none"
+                  class="h-4 w-full fill-current text-borde opacity-40"
+                >
+                  <path d="M0,20 C150,40 350,0 500,20 L500,40 L0,40 Z" />
+                </svg>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </Contenedor>
+
+  <!-- Botón flotante del carrito -->
+  <button
+    id="btn-abrir-carrito"
+    type="button"
+    class="fixed right-4 bottom-6 z-40 flex cursor-pointer items-center gap-3 rounded-marca bg-marca px-5 py-3.5 font-bold text-marca-contraste shadow-marca transition borde-marca hover:scale-105 sm:right-8 sm:bottom-8"
+    aria-label="Ver carrito de compras"
+  >
+    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+      ></path>
+    </svg>
+    <span class="hidden sm:inline">Carrito</span>
+    <span
+      id="carrito-badge"
+      class="flex h-6 min-w-6 items-center justify-center rounded-full bg-marca-contraste px-1.5 text-xs font-bold text-marca"
+    >
+      0
+    </span>
+  </button>
+
+  <!-- 1. Modal Rápido para elegir libras del producto -->
+  <dialog
+    id="modal-seleccion"
+    class="fixed inset-0 m-auto max-h-[85vh] w-11/12 max-w-sm rounded-marca bg-fondo p-6 shadow-marca borde-marca backdrop:bg-texto/60"
+    aria-labelledby="modal-sel-nombre"
+  >
+    <div class="flex items-start justify-between border-b border-borde pb-3">
+      <div>
+        <h2 id="modal-sel-nombre" class="text-2xl font-bold text-texto">Producto</h2>
+        <p id="modal-sel-precio-unitario" class="text-sm font-bold text-texto-suave">$0.00 / lb</p>
+      </div>
+      <button
+        id="btn-cerrar-seleccion"
+        type="button"
+        class="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-marca bg-fondo font-bold text-texto borde-marca hover:bg-superficie hover:text-marca-contraste"
+        aria-label="Cerrar ventana"
+      >
+        ✕
+      </button>
+    </div>
+
+    <div class="py-6 text-center">
+      <p class="text-sm font-bold text-texto">¿Cuántas libras deseas?</p>
+
+      <div class="mt-4 flex items-center justify-center gap-4">
+        <button
+          id="btn-sel-restar"
+          type="button"
+          class="flex h-11 w-11 cursor-pointer items-center justify-center rounded-marca bg-fondo text-xl font-bold text-texto borde-marca hover:bg-superficie hover:text-marca-contraste"
+          aria-label="Restar una libra"
+        >
+          -
+        </button>
+
+        <span id="modal-sel-libras" class="min-w-16 font-titulos text-3xl font-bold text-texto">
+          1 lb
+        </span>
+
+        <button
+          id="btn-sel-sumar"
+          type="button"
+          class="flex h-11 w-11 cursor-pointer items-center justify-center rounded-marca bg-fondo text-xl font-bold text-texto borde-marca hover:bg-superficie hover:text-marca-contraste"
+          aria-label="Sumar una libra"
+        >
+          +
+        </button>
+      </div>
+
+      <div class="mt-6 border-t border-borde/40 pt-4">
+        <p class="text-xs tracking-wider text-texto-suave uppercase">Subtotal</p>
+        <p id="modal-sel-subtotal" class="font-titulos text-3xl font-bold text-marca">$0.00</p>
+      </div>
+    </div>
+
+    <div>
+      <button
+        id="btn-confirmar-agregar"
+        type="button"
+        class="w-full cursor-pointer rounded-marca bg-marca py-3 text-base font-bold text-marca-contraste shadow-marca transition borde-marca hover:opacity-85"
+      >
+        Añadir al pedido
+      </button>
+    </div>
+  </dialog>
+
+  <!-- 2. Modal Completo del Carrito -->
+  <dialog
+    id="modal-carrito"
+    class="fixed inset-0 m-auto max-h-[85vh] w-11/12 max-w-lg overflow-y-auto rounded-marca bg-fondo p-6 shadow-marca borde-marca backdrop:bg-texto/60 sm:p-8"
+    aria-labelledby="titulo-carrito"
+  >
+    <div class="flex items-center justify-between border-b border-borde pb-4">
+      <div class="flex items-baseline gap-2">
+        <h2 id="titulo-carrito" class="text-2xl font-bold text-texto sm:text-3xl">Tu pedido</h2>
+        <span class="text-xs font-bold text-texto-suave sm:text-sm">(por libra)</span>
+      </div>
+      <button
+        id="btn-cerrar-carrito"
+        type="button"
+        class="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-marca bg-fondo font-bold text-texto transition borde-marca hover:bg-superficie hover:text-marca-contraste"
+        aria-label="Cerrar carrito"
+      >
+        ✕
+      </button>
+    </div>
+
+    <div id="carrito-items" class="mt-4 divide-y divide-borde/40">
+      <p id="carrito-vacio-msg" class="py-10 text-center text-texto opacity-75">
+        Tu carrito está vacío. Agrega tus embutidos favoritos.
+      </p>
+    </div>
+
+    <div class="mt-6 border-t border-borde pt-4">
+      <div class="flex items-center justify-between text-lg font-bold text-texto">
+        <span>Total estimado:</span>
+        <span id="carrito-total" class="font-titulos text-2xl text-marca">$0.00</span>
+      </div>
+
+      <div class="mt-6 flex flex-col gap-3">
+        <a
+          id="btn-whatsapp-pedido"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="pointer-events-none inline-flex w-full items-center justify-center gap-2 rounded-marca bg-marca px-5 py-3.5 font-bold text-marca-contraste opacity-50 shadow-marca transition borde-marca hover:opacity-85"
+        >
+          <span>Finalizar pedido por WhatsApp</span>
+          <span aria-hidden="true">→</span>
+        </a>
+
+        <button
+          id="btn-vaciar-carrito"
+          type="button"
+          class="cursor-pointer text-center text-xs font-bold text-texto-suave underline underline-offset-4 hover:opacity-80"
+        >
+          Vaciar pedido
+        </button>
+      </div>
+    </div>
+  </dialog>
+</section>
+
+<script>
+  // 1. Filtrado de categorías
+  const botonesFiltro = document.querySelectorAll<HTMLButtonElement>(".filtro-btn");
+  const tarjetas = document.querySelectorAll<HTMLElement>(".tarjeta-producto");
+
+  botonesFiltro.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filtro = btn.dataset.filtro;
+
+      botonesFiltro.forEach((b) => {
+        const activo = b === btn;
+        b.setAttribute("aria-pressed", activo ? "true" : "false");
+        if (activo) {
+          b.classList.remove("bg-fondo", "text-texto");
+          b.classList.add("bg-marca", "text-marca-contraste");
+        } else {
+          b.classList.remove("bg-marca", "text-marca-contraste");
+          b.classList.add("bg-fondo", "text-texto");
+        }
+      });
+
+      tarjetas.forEach((tarjeta) => {
+        const cat = tarjeta.dataset.categoria;
+        if (filtro === "todos" || cat === filtro) {
+          tarjeta.classList.remove("hidden");
+        } else {
+          tarjeta.classList.add("hidden");
+        }
+      });
+    });
+  });
+
+  // 2. Estado del Carrito y Modal de Selección
+  interface ItemCarrito {
+    id: string;
+    nombre: string;
+    precio: number;
+    libras: number;
+  }
+
+  let carrito: ItemCarrito[] = [];
+
+  const modalSeleccion = document.getElementById("modal-seleccion") as HTMLDialogElement | null;
+  const modalSelNombre = document.getElementById("modal-sel-nombre");
+  const modalSelPrecioUnit = document.getElementById("modal-sel-precio-unitario");
+  const modalSelLibras = document.getElementById("modal-sel-libras");
+  const modalSelSubtotal = document.getElementById("modal-sel-subtotal");
+  const btnSelRestar = document.getElementById("btn-sel-restar");
+  const btnSelSumar = document.getElementById("btn-sel-sumar");
+  const btnConfirmarAgregar = document.getElementById("btn-confirmar-agregar");
+  const btnCerrarSeleccion = document.getElementById("btn-cerrar-seleccion");
+
+  const modalCarrito = document.getElementById("modal-carrito") as HTMLDialogElement | null;
+  const btnAbrirCarrito = document.getElementById("btn-abrir-carrito") as HTMLButtonElement | null;
+  const btnCerrarCarrito = document.getElementById(
+    "btn-cerrar-carrito",
+  ) as HTMLButtonElement | null;
+  const btnVaciar = document.getElementById("btn-vaciar-carrito") as HTMLButtonElement | null;
+  const badgeCarrito = document.getElementById("carrito-badge");
+  const contenedorItems = document.getElementById("carrito-items");
+  const totalCarrito = document.getElementById("carrito-total");
+  const btnWhatsapp = document.getElementById("btn-whatsapp-pedido") as HTMLAnchorElement | null;
+
+  let productoActual = {
+    id: "",
+    nombre: "",
+    precio: 0,
+    libras: 1,
+  };
+
+  function actualizarModalSeleccion() {
+    if (modalSelLibras) modalSelLibras.textContent = `${productoActual.libras} lb`;
+    if (modalSelSubtotal) {
+      modalSelSubtotal.textContent = `$${(productoActual.libras * productoActual.precio).toFixed(2)}`;
+    }
+  }
+
+  const botonesAbrirSeleccion =
+    document.querySelectorAll<HTMLButtonElement>(".btn-abrir-seleccion");
+  botonesAbrirSeleccion.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      productoActual.id = btn.dataset.id || "";
+      productoActual.nombre = btn.dataset.nombre || "";
+      productoActual.precio = parseFloat(btn.dataset.precio || "0");
+      productoActual.libras = 1;
+
+      if (modalSelNombre) modalSelNombre.textContent = productoActual.nombre;
+      if (modalSelPrecioUnit) {
+        modalSelPrecioUnit.textContent = `$${productoActual.precio.toFixed(2)} por libra`;
+      }
+
+      actualizarModalSeleccion();
+      modalSeleccion?.showModal();
+    });
+  });
+
+  btnSelRestar?.addEventListener("click", () => {
+    if (productoActual.libras > 1) {
+      productoActual.libras--;
+      actualizarModalSeleccion();
+    }
+  });
+
+  btnSelSumar?.addEventListener("click", () => {
+    productoActual.libras++;
+    actualizarModalSeleccion();
+  });
+
+  btnCerrarSeleccion?.addEventListener("click", () => {
+    modalSeleccion?.close();
+  });
+
+  btnConfirmarAgregar?.addEventListener("click", () => {
+    const itemExistente = carrito.find((i) => i.id === productoActual.id);
+    if (itemExistente) {
+      itemExistente.libras += productoActual.libras;
+    } else {
+      carrito.push({
+        id: productoActual.id,
+        nombre: productoActual.nombre,
+        precio: productoActual.precio,
+        libras: productoActual.libras,
+      });
+    }
+
+    modalSeleccion?.close();
+    actualizarVistaCarrito();
+    modalCarrito?.showModal();
+  });
+
+  function actualizarVistaCarrito() {
+    const totalLibras = carrito.reduce((acc, item) => acc + item.libras, 0);
+    const totalDinero = carrito.reduce((acc, item) => acc + item.libras * item.precio, 0);
+
+    if (badgeCarrito) {
+      badgeCarrito.textContent = totalLibras.toString();
+    }
+
+    if (totalCarrito) {
+      totalCarrito.textContent = `$${totalDinero.toFixed(2)}`;
+    }
+
+    if (!contenedorItems) return;
+
+    if (carrito.length === 0) {
+      contenedorItems.innerHTML = `
+        <p class="py-10 text-center text-texto opacity-75">
+          Tu carrito está vacío. Agrega tus embutidos favoritos.
+        </p>
+      `;
+      if (btnWhatsapp) {
+        btnWhatsapp.classList.add("pointer-events-none", "opacity-50");
+        btnWhatsapp.href = "#";
+      }
+      return;
+    }
+
+    contenedorItems.innerHTML = "";
+
+    carrito.forEach((item, index) => {
+      const fila = document.createElement("div");
+      fila.className = "flex items-center justify-between py-3 gap-2";
+      fila.innerHTML = `
+        <div class="flex-1">
+          <p class="font-bold text-texto text-base leading-tight">${item.nombre}</p>
+          <p class="text-xs text-texto-suave">$${item.precio.toFixed(2)} por lb</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="flex items-center rounded-marca borde-marca bg-fondo">
+            <button type="button" class="btn-restar-modal px-2 py-1 text-xs font-bold text-texto hover:bg-superficie hover:text-marca-contraste" data-index="${index}">-</button>
+            <span class="min-w-8 text-center text-xs font-bold text-texto">${item.libras} lb</span>
+            <button type="button" class="btn-sumar-modal px-2 py-1 text-xs font-bold text-texto hover:bg-superficie hover:text-marca-contraste" data-index="${index}">+</button>
+          </div>
+          <span class="min-w-14 text-right font-bold text-texto text-sm">$${(item.libras * item.precio).toFixed(2)}</span>
+          <button type="button" class="btn-eliminar-modal text-texto-suave hover:text-marca font-bold px-1" data-index="${index}" aria-label="Eliminar producto">✕</button>
+        </div>
+      `;
+      contenedorItems.appendChild(fila);
+    });
+
+    contenedorItems.querySelectorAll<HTMLButtonElement>(".btn-restar-modal").forEach((b) => {
+      b.addEventListener("click", () => {
+        const idx = parseInt(b.dataset.index || "0");
+        if (carrito[idx].libras > 1) {
+          carrito[idx].libras--;
+        } else {
+          carrito.splice(idx, 1);
+        }
+        actualizarVistaCarrito();
+      });
+    });
+
+    contenedorItems.querySelectorAll<HTMLButtonElement>(".btn-sumar-modal").forEach((b) => {
+      b.addEventListener("click", () => {
+        const idx = parseInt(b.dataset.index || "0");
+        carrito[idx].libras++;
+        actualizarVistaCarrito();
+      });
+    });
+
+    contenedorItems.querySelectorAll<HTMLButtonElement>(".btn-eliminar-modal").forEach((b) => {
+      b.addEventListener("click", () => {
+        const idx = parseInt(b.dataset.index || "0");
+        carrito.splice(idx, 1);
+        actualizarVistaCarrito();
+      });
+    });
+
+    if (btnWhatsapp) {
+      btnWhatsapp.classList.remove("pointer-events-none", "opacity-50");
+
+      const detalleLineas = carrito.map(
+        (i) => `• ${i.libras} lb de ${i.nombre} ($${(i.libras * i.precio).toFixed(2)})`,
+      );
+
+      const mensaje = `Hola Embutidos Don Alfredo, deseo realizar el siguiente pedido:\n\n${detalleLineas.join("\n")}\n\n*Total estimado: $${totalDinero.toFixed(2)}*\n\n¿Me confirman disponibilidad para coordinar la entrega?`;
+
+      btnWhatsapp.href = `https://wa.me/593962868133?text=${encodeURIComponent(mensaje)}`;
+    }
+  }
+
+  btnAbrirCarrito?.addEventListener("click", () => {
+    actualizarVistaCarrito();
+    modalCarrito?.showModal();
+  });
+
+  btnCerrarCarrito?.addEventListener("click", () => {
+    modalCarrito?.close();
+  });
+
+  btnVaciar?.addEventListener("click", () => {
+    carrito = [];
+    actualizarVistaCarrito();
+  });
+
+  [modalSeleccion, modalCarrito].forEach((dialog) => {
+    dialog?.addEventListener("click", (e) => {
+      const rect = dialog.getBoundingClientRect();
+      const clickInterior =
+        rect.top <= e.clientY &&
+        e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX &&
+        e.clientX <= rect.left + rect.width;
+      if (!clickInterior) {
+        dialog.close();
+      }
+    });
+  });
+</script>

@@ -1,0 +1,84 @@
+---
+/*
+  Sección Productos destacados en la página de inicio.
+  Presenta las tres variedades de salchichas rojas con tarjetas estilizadas,
+  onda decorativa en la base y enlace al catálogo completo.
+*/
+import { Image } from "astro:assets";
+import Seccion from "../ui/Seccion.astro";
+import Boton from "../ui/Boton.astro";
+import img01 from "@pack/imagenes/producto_destacado_01..jpeg";
+import img02 from "@pack/imagenes/producto_destacado_02.png";
+import img03 from "@pack/imagenes/producto_destacado_03.png";
+
+const productos = [
+  {
+    titulo: "Salchicha Delgada",
+    descripcion: "La favorita de todos",
+    imagen: img01,
+    alt: "Fotografía del primer embutido.",
+  },
+  {
+    titulo: "Salchicha Mediana",
+    descripcion: "Ideal para tu día a día",
+    imagen: img02,
+    alt: "Fotografía del segundo embutido.",
+  },
+  {
+    titulo: "Salchicha Gruesa",
+    descripcion: "La que rinde más",
+    imagen: img03,
+    alt: "Fotografía del tercer embutido.",
+  },
+];
+---
+
+<Seccion id="productos-destacados" titulo="Nuestros productos destacados.">
+  <p class="-mt-4 mb-10 max-w-2xl text-base text-texto sm:text-lg" data-revelar>
+    Encuentra una variedad de embutidos ideales para disfrutar en tus comidas y preparar tus recetas
+    favoritas.
+  </p>
+
+  <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3" data-revelar-cascada>
+    {
+      productos.map((item) => (
+        <article
+          class="relative flex flex-col overflow-hidden rounded-marca bg-fondo shadow-marca borde-marca"
+          data-revelar
+        >
+          <div class="relative h-60 w-full overflow-hidden sm:h-64">
+            <Image
+              src={item.imagen}
+              alt={item.alt}
+              class="h-full w-full object-cover transition duration-300 hover:scale-105"
+            />
+          </div>
+
+          <div class="relative flex flex-1 flex-col justify-between p-6 pb-10">
+            <div>
+              <h3 class="text-2xl font-bold tracking-tight text-texto">{item.titulo}</h3>
+              <p class="mt-2 text-base text-texto">{item.descripcion}</p>
+            </div>
+
+            <div
+              class="pointer-events-none absolute inset-x-0 bottom-0 leading-none"
+              aria-hidden="true"
+            >
+              <svg
+                viewBox="0 0 500 40"
+                preserveAspectRatio="none"
+                class="h-4 w-full fill-current text-borde opacity-40"
+              >
+                <path d="M0,20 C150,40 350,0 500,20 L500,40 L0,40 Z" />
+              </svg>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+
+  <div class="mt-12 text-center" data-revelar>
+    <Boton href="/productos">Ver catálogo completo</Boton>
+  </div>
+</Seccion>

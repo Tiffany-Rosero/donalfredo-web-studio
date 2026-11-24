@@ -1,0 +1,37 @@
+---
+/*
+  Pie de página del sitio. Los datos salen de src/datos/sitio.ts.
+*/
+import Contenedor from "./ui/Contenedor.astro";
+import { redes, sitio } from "../datos/sitio";
+
+const anio = new Date().getFullYear();
+const pie = sitio.pie || `© ${anio} ${sitio.nombre}`;
+---
+
+<footer class="border-t border-borde bg-superficie text-sm">
+  <Contenedor class="flex flex-col gap-4 py-8 sm:flex-row sm:items-center sm:justify-between">
+    <p>{pie}</p>
+
+    {
+      (sitio.correo || redes.length > 0) && (
+        <ul class="flex flex-wrap gap-4">
+          {sitio.correo && (
+            <li>
+              <a href={`mailto:${sitio.correo}`} class="underline underline-offset-4">
+                {sitio.correo}
+              </a>
+            </li>
+          )}
+          {redes.map((red) => (
+            <li>
+              <a href={red.href} class="underline underline-offset-4">
+                {red.nombre}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </Contenedor>
+</footer>

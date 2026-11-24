@@ -1,0 +1,39 @@
+---
+/*
+  Sección Ideas deliciosas (Recetas resumen) en la página de inicio.
+  Invita a descubrir preparaciones rápidas y fáciles con embutidos Don Alfredo,
+  mostrando fotografía gastronómica y botón de acceso a /recetas.
+*/
+import { Image } from "astro:assets";
+import Contenedor from "../ui/Contenedor.astro";
+import Boton from "../ui/Boton.astro";
+import fotoReceta from "@pack/imagenes/Mortadela Receta.jpeg";
+---
+
+<section id="recetas-resumen" class="py-16 md:py-24">
+  <Contenedor>
+    <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-12" data-revelar-cascada>
+      <div class="flex flex-col items-start" data-revelar>
+        <h2 class="text-3xl font-bold tracking-tight text-texto sm:text-4xl lg:text-5xl">
+          Ideas deliciosas
+        </h2>
+
+        <p class="mt-4 text-base text-texto sm:text-lg">
+          Descubre recetas fáciles y rápidas con nuestros embutidos.
+        </p>
+
+        <div class="mt-8">
+          <Boton href="/recetas">Ver recetas</Boton>
+        </div>
+      </div>
+
+      <div class="overflow-hidden rounded-marca shadow-marca borde-marca" data-revelar>
+        <Image
+          src={fotoReceta}
+          alt="Fotografía de receta de mortadela"
+          class="aspect-4/3 w-full object-cover"
+        />
+      </div>
+    </div>
+  </Contenedor>
+</section>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 780" width="2000" height="780">
+  <title>Embutidos Don Alfredo</title>
+  <rect width="2000" height="780" fill="#ffffff"/>
+
+  <!-- Figura vino -->
+  <path fill="#A8040F" d="M395 35 C340 70 310 70 250 125 C228 160 226 195 235 230 L235 245 C160 270 110 300 80 350 C78 365 90 372 100 368 C160 340 220 332 268 336 C276 336 278 332 282 322 C295 285 330 262 410 236 C424 238 426 252 420 266 C408 290 392 306 385 318 C384 324 390 326 398 330 C440 342 480 362 520 378 C545 384 575 376 590 364 C600 370 600 384 592 392 C572 405 530 412 490 440 C465 458 448 480 432 505 C436 508 470 506 500 504 C518 502 524 494 540 480 C575 450 610 448 645 438 C685 425 705 400 700 368 C697 345 685 332 665 326 C615 312 580 290 545 250 C510 210 475 186 440 184 C420 186 405 190 380 184 C352 174 340 150 346 125 C352 90 380 55 398 40 C400 34 398 32 395 35 Z"/>
+  <ellipse cx="660" cy="361" rx="14" ry="19" fill="#ffffff"/>
+
+  <!-- EMBUTIDOS -->
+  <text x="795" y="279" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-weight="900" font-size="96" fill="#A8040F" textLength="1140" lengthAdjust="spacing">EMBUTIDOS</text>
+
+  <!-- Don Alfredo -->
+  <g fill="#FB6405" font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-weight="900" font-style="italic">
+    <text x="205" y="655" font-size="265" textLength="430" lengthAdjust="spacingAndGlyphs">Don</text>
+    <text x="625" y="660" font-size="430" textLength="1330" lengthAdjust="spacingAndGlyphs">Alfredo</text>
+  </g>
+</svg>

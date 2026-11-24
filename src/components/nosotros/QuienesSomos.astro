@@ -1,0 +1,51 @@
+---
+/*
+  Sección Quiénes somos en la página Nosotros.
+*/
+import { Image } from "astro:assets";
+import Contenedor from "../ui/Contenedor.astro";
+import fotoHistoria from "@pack/logos/Logo negro.svg";
+---
+
+<section id="quienes-somos" class="py-12 sm:py-16 md:py-24">
+  <Contenedor>
+    <div class="grid items-stretch gap-8 lg:grid-cols-2" data-revelar-cascada>
+      <div
+        class="flex min-h-75 items-center justify-center overflow-hidden rounded-marca bg-fondo p-8 shadow-marca borde-marca sm:p-12 lg:min-h-90 lg:p-16"
+        data-revelar
+      >
+        <Image
+          src={fotoHistoria}
+          alt="Embutidos Don Alfredo"
+          class="h-auto max-h-64 w-full max-w-xs object-contain sm:max-h-72 sm:max-w-sm lg:max-h-80 lg:max-w-md"
+          loading="eager"
+        />
+      </div>
+
+      <div
+        class="flex flex-col items-center justify-center rounded-marca bg-marca p-8 text-center text-marca-contraste shadow-marca borde-marca sm:p-12 lg:items-start lg:text-left"
+        data-revelar
+      >
+        <h1 class="text-4xl font-bold tracking-tight text-marca-contraste sm:text-5xl lg:text-6xl">
+          Conoce nuestra historia.
+        </h1>
+
+        <p class="mt-6 text-base leading-relaxed text-marca-contraste opacity-95 sm:text-lg">
+          Embutidos Don Alfredo es una empresa ecuatoriana dedicada a la producción y
+          comercialización de embutidos de alta calidad. Nuestro propósito es llevar sabor y
+          tradición a cada hogar, ofreciendo productos que formen parte de las comidas y momentos
+          especiales de nuestros clientes.
+        </p>
+
+        <div class="mt-8">
+          <a
+            href="#nuestra-esencia"
+            class="inline-flex items-center gap-2 rounded-marca bg-marca-contraste px-5 py-3 font-bold text-marca shadow-marca transition borde-marca hover:opacity-90 motion-reduce:transition-none"
+          >
+            Conocer más
+          </a>
+        </div>
+      </div>
+    </div>
+  </Contenedor>
+</section>

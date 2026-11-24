@@ -1,0 +1,54 @@
+---
+/*
+  Sección Nuestra esencia (Valores) en la página Nosotros.
+  Muestra los tres pilares de la marca: Tradición, Calidad y Cercanía.
+*/
+import Seccion from "../ui/Seccion.astro";
+
+const valores = [
+  {
+    titulo: "Tradición",
+    descripcion: "Buscamos conservar el valor de los sabores que acompañan nuestras comidas.",
+  },
+  {
+    titulo: "Calidad",
+    descripcion:
+      "Nos enfocamos en ofrecer productos que respondan a las expectativas de nuestros clientes.",
+  },
+  {
+    titulo: "Cercanía",
+    descripcion:
+      "Queremos formar parte de los hogares y negocios que confían en nuestros productos.",
+  },
+];
+---
+
+<Seccion id="nuestra-esencia" titulo="Lo que nos representa.">
+  <p class="-mt-4 mb-10 max-w-2xl text-base text-texto sm:text-lg" data-revelar>
+    Valores que guían nuestro trabajo diario en cada producto.
+  </p>
+
+  <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3" data-revelar-cascada>
+    {
+      valores.map((item, index) => (
+        <article
+          class="relative flex flex-col justify-between rounded-marca bg-fondo p-8 shadow-marca borde-marca"
+          data-revelar
+        >
+          <div>
+            <div class="mb-4 flex items-center gap-3">
+              <span class="flex h-10 w-10 items-center justify-center rounded-marca bg-superficie font-titulos text-xl font-bold text-marca-contraste">
+                0{index + 1}
+              </span>
+              <h3 class="text-2xl font-bold tracking-tight text-texto">{item.titulo}</h3>
+            </div>
+
+            <p class="text-base leading-relaxed text-texto">{item.descripcion}</p>
+          </div>
+
+          <div class="mt-6 h-1 w-12 rounded-marca bg-marca" aria-hidden="true" />
+        </article>
+      ))
+    }
+  </div>
+</Seccion>

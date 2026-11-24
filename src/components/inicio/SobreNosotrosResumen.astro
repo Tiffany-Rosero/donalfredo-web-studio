@@ -1,0 +1,38 @@
+---
+import { Image } from "astro:assets";
+import Contenedor from "../ui/Contenedor.astro";
+import Boton from "../ui/Boton.astro";
+import fotoTradicion from "@pack/imagenes/Portada_embutidos.png";
+---
+
+<section id="sobre-nosotros-resumen" class="py-16 md:py-24">
+  <Contenedor>
+    <div class="grid items-stretch gap-8 lg:grid-cols-2" data-revelar-cascada>
+      <div class="overflow-hidden rounded-marca shadow-marca borde-marca" data-revelar>
+        <Image
+          src={fotoTradicion}
+          alt="Fotografía representativa de la tradición de Don Alfredo"
+          class="h-64 min-h-75 w-full object-cover sm:h-80 lg:h-full lg:min-h-90"
+        />
+      </div>
+
+      <div
+        class="flex flex-col items-center justify-center rounded-marca bg-marca p-8 text-center text-marca-contraste shadow-marca borde-marca sm:p-12 lg:items-start lg:text-left"
+        data-revelar
+      >
+        <h2 class="text-3xl font-bold tracking-tight text-marca-contraste sm:text-4xl lg:text-5xl">
+          Tradición que se comparte.
+        </h2>
+
+        <p class="mt-4 text-base text-marca-contraste opacity-95 sm:text-lg">
+          En Embutidos Don Alfredo buscamos llevar sabor y tradición a cada hogar, ofreciendo
+          productos que acompañan los momentos más especiales.
+        </p>
+
+        <div class="mt-8">
+          <Boton href="/nosotros">Conócenos</Boton>
+        </div>
+      </div>
+    </div>
+  </Contenedor>
+</section>

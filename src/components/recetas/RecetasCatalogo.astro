@@ -1,0 +1,273 @@
+---
+/*
+  Sección Ideas de preparación en la página recetas.
+  Presenta el recetario interactivo con tarjetas descriptivas y modales accesibles (<dialog>)
+  para detallar ingredientes y pasos de elaboración.
+*/
+import { Image } from "astro:assets";
+import Contenedor from "../ui/Contenedor.astro";
+import fotoMortadela from "@pack/imagenes/Mortadela Receta.jpeg";
+import fotoSalchichas from "@pack/imagenes/Salchicha Parilla.jpeg";
+import fotoChoripan from "@pack/imagenes/Choripan Receta.jpeg";
+
+const recetas = [
+  {
+    id: "modal-mortadela",
+    titulo: "Sánduche de mortadela",
+    descripcion: "Descubre nuevas formas de disfrutar tu mortadela en deliciosos sándwiches",
+    imagen: fotoMortadela,
+    alt: "Fotografía de Sánduche de mortadela",
+    ingredientes: [
+      "1. Pan artesanal crujiente por fuera y suave por dentro.",
+      "2. Mortadela en rodajas finas",
+      "3. Aderezo de albahaca",
+      "4. Rodajas finas de tomate maduro y hojas frescas de lechuga",
+      "5. Opcional: Un toque de aceite de oliva y pimienta negra recién molida.",
+    ],
+    preparacion: [
+      {
+        paso: "Tostar el pan",
+        detalle:
+          "Abre el pan por la mitad y, si lo deseas, dóralo ligeramente en una sartén sin aceite hasta que esté tibio y crujiente.",
+      },
+      {
+        paso: "Untar la base",
+        detalle: "Coloca una capa generosa de aderezo.",
+      },
+      {
+        paso: "Armar las capas",
+        detalle:
+          "Dobla las rodajas de mortadela delicadamente formando ondas o pliegues para darle altura y una presentación atractiva al sándwich.",
+      },
+      {
+        paso: "Agregar los vegetales",
+        detalle: "Acomoda las rodajas de tomate sobre la mortadela y coloca la lechuga.",
+      },
+      {
+        paso: "Cerrar y servir",
+        detalle:
+          "Coloca la tapa del pan. Para darle un acabado profesional y elegante, puedes atravesarlo con un palillo de bambú decorativo. ¡Listo para disfrutar!",
+      },
+    ],
+  },
+  {
+    id: "modal-salchichas",
+    titulo: "Salchichas a la parrilla",
+    descripcion:
+      "Disfruta unas deliciosas salchichas rojas a la parrilla, perfectas para compartir.",
+    imagen: fotoSalchichas,
+    alt: "Fotografía de Salchichas a la parrilla",
+    ingredientes: ["1. Salchicha Roja", "2. Parilla", "3. Carbón", "4. Pinza"],
+    preparacion: [
+      {
+        paso: "Limpieza",
+        detalle:
+          "Antes de comenzar, asegúrate de que la rejilla de la parrilla esté limpia y aceitada para evitar que las salchichas se peguen.",
+      },
+      {
+        paso: "Preparación del fuego",
+        detalle:
+          "Si usas carbón, distribúyelo para crear una zona de calor directo (fuego medio-bajo) y una zona de calor indirecto (sin carbón debajo). Si usas gas, enciende los quemadores a fuego medio-bajo.",
+      },
+      {
+        paso: "Cocción inicial",
+        detalle:
+          "Coloca las salchichas en la zona de calor directo. Cocínalas durante unos 10-15 minutos en total, dándoles la vuelta con unas pinzas cada 3-4 minutos para que se doren uniformemente por todos lados. No las pinches con un tenedor, ya que esto dejará escapar los jugos y las resecará.",
+      },
+      {
+        paso: "Servir",
+        detalle:
+          "Retíralas de la parrilla y déjalas reposar durante unos minutos antes de servirlas.",
+      },
+    ],
+  },
+  {
+    id: "modal-choripan",
+    titulo: "Choripan",
+    descripcion: "El clásico choripán, con todo el sabor de nuestro chorizo.",
+    imagen: fotoChoripan,
+    alt: "Fotografía de Choripan",
+    ingredientes: [
+      "1. Pan: Pan baguette de corteza crujiente y miga suave.",
+      "2. Chorizo de la casa",
+      "3. Chimichurri fresco hecho con perejil, ajo, aceite de oliva, vinagre, un toque de ají picante y especias.",
+      "4. Opcional: Un toque de cebolla roja encurtida o rodajas finas de tomate para realzar la frescura.",
+    ],
+    preparacion: [
+      {
+        paso: "Asar los chorizos",
+        detalle:
+          "Cocina los chorizos a la parrilla a fuego medio-bajo, dándoles la vuelta constantemente para que se doren de forma uniforme por fuera y queden jugosos por dentro, cuidando de no pincharlos para que conserven todos sus jugos.",
+      },
+      {
+        paso: "Preparar el pan",
+        detalle:
+          "Abre el pan por la mitad (sin cortarlo por completo) y tuéstalo ligeramente en la parrilla o sartén.",
+      },
+      {
+        paso: "Armar el choripán",
+        detalle: "Coloca el chorizo recién salido de la parrilla dentro del pan.",
+      },
+      {
+        paso: "Agregar el chimichurri",
+        detalle:
+          "Baña generosamente el chorizo con el chimichurri fresco para que los jugos se mezclen con el pan y los sabores resalten al máximo.",
+      },
+      {
+        paso: "Presentación",
+        detalle:
+          "Sírvelo caliente, opcionalmente acompañado de unas ramitas de romero o tomates cherry.",
+      },
+    ],
+  },
+];
+---
+
+<section id="recetas-catalogo" class="py-12 sm:py-16 md:py-24">
+  <Contenedor>
+    <div class="text-center" data-revelar>
+      <h1 class="text-4xl font-bold tracking-tight text-texto sm:text-5xl lg:text-6xl">
+        Ideas deliciosas para tu mesa
+      </h1>
+
+      <p class="mx-auto mt-4 max-w-2xl text-base text-texto sm:text-lg">
+        Descubre recetas fáciles y rápidas con nuestros embutidos.
+      </p>
+    </div>
+
+    <!-- Cuadrícula de recetas -->
+    <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3" data-revelar-cascada>
+      {
+        recetas.map((receta) => (
+          <article
+            class="relative flex flex-col overflow-hidden rounded-marca bg-fondo shadow-marca borde-marca"
+            data-revelar
+          >
+            <div class="relative h-60 w-full overflow-hidden sm:h-64">
+              <Image
+                src={receta.imagen}
+                alt={receta.alt}
+                class="h-full w-full object-cover transition duration-300 hover:scale-105"
+              />
+            </div>
+
+            <div class="flex flex-1 flex-col justify-between p-6">
+              <div>
+                <h2 class="text-2xl font-bold tracking-tight text-texto">{receta.titulo}</h2>
+                <p class="mt-2 text-base text-texto">{receta.descripcion}</p>
+              </div>
+
+              <div class="mt-6">
+                <button
+                  type="button"
+                  data-abrir-modal={receta.id}
+                  class="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-marca bg-marca px-5 py-3 font-bold text-marca-contraste shadow-marca transition borde-marca hover:opacity-85 motion-reduce:transition-none"
+                >
+                  Ver receta
+                </button>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </Contenedor>
+</section>
+
+<!-- Modales accesibles con etiqueta nativa <dialog> -->
+{
+  recetas.map((receta) => (
+    <dialog
+      id={receta.id}
+      class="fixed inset-0 m-auto max-h-[85vh] w-11/12 max-w-2xl overflow-y-auto rounded-marca bg-fondo p-6 shadow-marca borde-marca backdrop:bg-texto/60 sm:p-8"
+      aria-labelledby={`titulo-${receta.id}`}
+    >
+      <div class="flex items-start justify-between gap-4 border-b border-borde pb-4">
+        <h2 id={`titulo-${receta.id}`} class="text-2xl font-bold text-texto sm:text-3xl">
+          {receta.titulo}
+        </h2>
+        <button
+          type="button"
+          data-cerrar-modal
+          class="inline-flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-marca bg-fondo font-bold text-texto transition borde-marca hover:bg-superficie hover:text-marca-contraste"
+          aria-label="Cerrar modal"
+        >
+          ✕
+        </button>
+      </div>
+
+      <div class="mt-6 space-y-6">
+        <div>
+          <h3 class="text-xl font-bold text-marca">Ingredientes:</h3>
+          <ul class="mt-3 space-y-2 text-base text-texto">
+            {receta.ingredientes.map((ing) => (
+              <li>{ing}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold text-marca">Preparación:</h3>
+          <ol class="mt-3 space-y-3 text-base text-texto">
+            {receta.preparacion.map((item) => (
+              <li>
+                <strong class="font-bold">{item.paso}:</strong> {item.detalle}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+
+      <div class="mt-8 border-t border-borde pt-4 text-right">
+        <button
+          type="button"
+          data-cerrar-modal
+          class="inline-flex cursor-pointer items-center rounded-marca bg-marca px-5 py-2.5 font-bold text-marca-contraste shadow-marca transition borde-marca hover:opacity-85"
+        >
+          Cerrar
+        </button>
+      </div>
+    </dialog>
+  ))
+}
+
+<script>
+  const botonesAbrir = document.querySelectorAll<HTMLButtonElement>("[data-abrir-modal]");
+  const botonesCerrar = document.querySelectorAll<HTMLButtonElement>("[data-cerrar-modal]");
+  const modales = document.querySelectorAll<HTMLDialogElement>("dialog");
+
+  botonesAbrir.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const modalId = btn.dataset.abrirModal;
+      if (!modalId) return;
+      const modal = document.getElementById(modalId) as HTMLDialogElement | null;
+      if (modal) {
+        modal.showModal();
+      }
+    });
+  });
+
+  botonesCerrar.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const modal = btn.closest("dialog");
+      if (modal) {
+        modal.close();
+      }
+    });
+  });
+
+  // Cerrar al hacer clic en el backdrop fuera del diálogo
+  modales.forEach((modal) => {
+    modal.addEventListener("click", (e) => {
+      const rect = modal.getBoundingClientRect();
+      const clickEnInterior =
+        rect.top <= e.clientY &&
+        e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX &&
+        e.clientX <= rect.left + rect.width;
+      if (!clickEnInterior) {
+        modal.close();
+      }
+    });
+  });
+</script>

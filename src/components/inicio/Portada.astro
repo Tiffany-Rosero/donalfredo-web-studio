@@ -1,0 +1,84 @@
+---
+/*
+  Portada (Hero) de la página de inicio.
+*/
+import { Image } from "astro:assets";
+import Contenedor from "../ui/Contenedor.astro";
+import Boton from "../ui/Boton.astro";
+import heroImg from "@pack/logos/Logo principal.svg";
+---
+
+<section
+  id="hero"
+  class="relative overflow-hidden bg-marca pt-12 pb-20 text-marca-contraste sm:pb-24 md:py-20 lg:py-24"
+>
+  <Contenedor>
+    <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-12" data-revelar-cascada>
+      <div class="flex flex-col items-center text-center lg:items-start lg:text-left">
+        <h1
+          class="text-4xl font-bold tracking-tight text-marca-contraste sm:text-5xl lg:text-6xl"
+          data-revelar
+        >
+          El sabor de la tradición en tu mesa.
+        </h1>
+
+        <p class="mt-4 max-w-xl text-base text-marca-contraste opacity-95 sm:text-lg" data-revelar>
+          Descubre nuestros embutidos, elaborados para acompañar tus comidas y compartir momentos
+          especiales en familia.
+        </p>
+
+        <div
+          class="mt-8 flex w-full flex-col items-center justify-center gap-4 sm:w-auto sm:flex-row lg:justify-start"
+          data-revelar
+        >
+          <Boton href="/productos">Conoce nuestros productos</Boton>
+          <Boton href="/contacto">Contáctanos</Boton>
+        </div>
+
+        <div
+          class="mt-10 flex items-center gap-4 text-sm font-bold tracking-wider"
+          aria-label="Paginación"
+          data-revelar
+        >
+          <span class="flex items-center gap-2 border-b-2 border-borde pb-0.5 text-marca-contraste">
+            <span class="h-2.5 w-2.5 rounded-full bg-borde"></span>
+            01
+          </span>
+          <span class="flex items-center gap-2 text-marca-contraste opacity-60">
+            <span class="h-2 w-2 rounded-full bg-marca-contraste opacity-40"></span>
+            02
+          </span>
+          <span class="flex items-center gap-2 text-marca-contraste opacity-60">
+            <span class="h-2 w-2 rounded-full bg-marca-contraste opacity-40"></span>
+            03
+          </span>
+        </div>
+      </div>
+
+      <div
+        class="relative flex items-center justify-center overflow-hidden rounded-marca bg-fondo p-8 shadow-marca borde-marca sm:p-12 lg:p-16"
+        data-revelar
+      >
+        <Image
+          src={heroImg}
+          alt="Embutidos Don Alfredo"
+          class="h-auto max-h-64 w-full max-w-xs object-contain sm:max-h-72 sm:max-w-sm lg:max-h-80 lg:max-w-md"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </Contenedor>
+
+  <div
+    class="pointer-events-none absolute inset-x-0 bottom-0 w-full overflow-hidden leading-none"
+    aria-hidden="true"
+  >
+    <svg
+      viewBox="0 0 1200 120"
+      preserveAspectRatio="none"
+      class="relative block h-6 w-full fill-current text-fondo sm:h-10 lg:h-12"
+    >
+      <path d="M0,0 C300,80 900,80 1200,0 L1200,120 L0,120 Z"></path>
+    </svg>
+  </div>
+</section>
